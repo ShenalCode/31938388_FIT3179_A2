@@ -11,7 +11,7 @@
             "layer": [
                 {
                     "data": {
-                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179Week9Homework/main/js/ne_110m.json",
+                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
                         "format": { 
                           "type": "topojson",
                           "feature": "ne_110m_admin_0_countries"
@@ -36,7 +36,7 @@
                 },
                 {
                     "data": {
-                        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/oceans.topojson",
                         "format": {
                             "type": "topojson",
                             "feature": "oceans"
@@ -49,14 +49,14 @@
                 },
                 {
                     "data": {
-                        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/WorldMapWithGraticules.topojson",
                         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
                       },
                       "mark": {"type": "geoshape", "fill": null, "stroke": "#bec4c7"}
                 },
                 {
                     "data": {
-                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179Week9Homework/main/js/ne_110m.json",
+                        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
                         "format": { 
                           "type": "topojson",
                           "feature": "ne_110m_admin_0_countries"
@@ -67,7 +67,7 @@
                           "lookup": "properties.NAME",
                           "from": {
                             "data": {
-                              "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179Week9Homework/main/data/WHR_AVG.csv"
+                              "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
                             },
                             "key": "country",
                             "fields": [
