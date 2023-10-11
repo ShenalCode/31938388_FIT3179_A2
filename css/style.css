@@ -1,0 +1,69 @@
+html,
+body {
+    background-color: #f8e9f9;
+}
+
+#text_div1 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#text_div2 {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#text_div3 {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+h1 {
+    text-align: center;
+    color: #165a72;
+    font-family: 'Oswald', sans-serif; 
+    font-size: 84;
+}
+
+h3 {
+    text-align: center;
+    color: #165a72;
+    font-size: 24;
+    font-family: 'Oswald', sans-serif; 
+}
+
+p {
+    color: black;
+    font-size: 20;
+    font-family: 'Roboto', sans-serif;
+}
+
+pure-u-1-2  {
+    background-color: #f8e9f9;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+#map {
+    align-content: center;
+    display: block;
+}
+
+#scatterplot1 {
+    align-content: right;
+    display: block;
+}
+
+#dotplot1 {
+    align-content: left;
+    display: block;
+}
+
+#top-text1{
+        margin-right: 50px;
+        margin-left: 50px;
+        margin-top: 20px;
+        margin-bottom: 50px;
+}

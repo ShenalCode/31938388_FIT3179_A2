@@ -1,0 +1,94 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Correlation between Happiness Score and GDP per Capita",
+    "width": 400,
+    "height": 300,  
+    "background": "#f8e9f9",
+    "data": {
+      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
+    },
+        "selection": {
+      "region_highlight": {
+      "type": "single",
+      "fields": ["region"],
+      "bind": "legend"
+      },
+          "size_highlight": {
+      "type": "single",
+      "encodings": ["size"],
+      "bind": "legend"
+    }
+    },      
+    "transform": [
+        {
+          "aggregate": [
+            {"op": "mean", "field": "social_support", "as": "average social support"},
+             {"op": "mean", "field": "healthy_life_expectancy", "as": "average life expectancy"},
+            {"op": "mean", "field": "happiness_score", "as": "average happiness score"}
+        ],
+          "groupby": ["country", "region"]
+        }
+      ],          
+    "mark": "circle",
+        "encoding": {
+      "x": {
+        "field": "average social support",
+        "type": "quantitative",
+        "title": "Social Support"
+      },
+      "y": {
+        "field": "average life expectancy",
+        "type": "quantitative",
+        "title": "Life Expectancy"
+      },
+      "size": {
+        "field": "average happiness score",
+        "type": "quantitative",
+        "title": "Happiness Score"
+      },  
+      "color": {
+        "field": "region", 
+        "type": "nominal",
+        "title": "Region",
+        "scale": {
+          "range": ["#1f77b4", "#2ca02c", "#8c564b", "#d62728", "#bcbd22", "#ff7f0e", "#e377c2", 
+        "#9467bd", "#17becf", "#7f7f7f", "#ff9896"]
+        }
+    },
+      "opacity": {
+        "condition": {"selection": "region_highlight", "value": 0.6},
+        "value": 0.05
+    },
+      "tooltip": [
+        {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+        },
+        {
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+        },
+        {
+          "field": "average happiness score",
+          "type": "quantitative",
+          "title": "Happiness Score",
+          "format": ".2f"
+        },
+        {
+          "field": "average social support",
+          "type": "quantitative",
+          "title": "Social Support",
+          "format": ".2f"
+        },
+        {
+          "field": "average life expectancy",
+          "type": "quantitative",
+          "title": "Life Expectancy",
+          "format": ".2f"
+        }
+    ]
+  }
+}
+  

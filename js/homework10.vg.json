@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Correlation between Happiness Score and GDP per Capita",
-    "width": 400,
+    "width": "container",
     "height": 300,  
+    "background": "#f8e9f9",
     "data": {
       "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
     },
@@ -38,9 +38,6 @@
         "field": "region", 
         "type": "nominal",
         "title": "Region",
-        "legend": {
-          "gradientLength": 500
-        },
         "scale": {
           "range": ["#1f77b4", "#2ca02c", "#8c564b", "#d62728", "#bcbd22", "#ff7f0e", "#e377c2", 
         "#9467bd", "#17becf", "#7f7f7f", "#ff9896"]

@@ -1,0 +1,61 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 300,  
+    "background": "#f8e9f9",
+    "data": {
+      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
+    },
+    "transform": [
+    {
+      "aggregate": [{
+       "op": "mean",
+       "field": "happiness_score",
+       "as": "average happiness score"
+      }],
+      "groupby": ["country", "region"]
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "size": 100  
+  },
+  "encoding": {
+    "x": {
+      "field": "average happiness score",
+      "type": "quantitative",
+      "axis": {
+        "grid": false,
+        "title": null
+    },
+      "scale": {"zero": false}
+    },
+    "y": {
+        "field": "region", 
+        "type": "nominal", 
+        "axis": {"title": "Region"}
+    },
+    "color": {
+        "field": "region", 
+        "type": "nominal", 
+        "legend": null,
+        "scale": {
+            "range": ["#1f77b4", "#2ca02c", "#8c564b", "#d62728", "#bcbd22", "#ff7f0e", "#e377c2", 
+          "#9467bd", "#17becf", "#7f7f7f", "#ff9896"]
+          }  
+    },
+    "tooltip": [
+        {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+        },
+        {
+            "field": "average happiness score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+        }
+    ]
+  }
+}

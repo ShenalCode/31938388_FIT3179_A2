@@ -1,9 +1,10 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "background": "#f8e9f9",
     "vconcat": [
         {
-            "width": 800,
-            "height": 500,
+            "width": "container",
+            "height": 400,
             "title": "Average Happiness Score of Countries in the World (2015-2023)",
             "projection": {
                 "type": "equalEarth"
