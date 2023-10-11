@@ -26,14 +26,16 @@
       "type": "quantitative",
       "axis": {
         "grid": false,
-        "title": null
+        "title": "Average  Happiness Score"
     },
       "scale": {"zero": false}
     },
     "y": {
         "field": "region", 
         "type": "nominal", 
-        "axis": {"title": "Region"}
+        "axis": {
+          "title": null
+        }
     },
     "color": {
         "field": "region", 
