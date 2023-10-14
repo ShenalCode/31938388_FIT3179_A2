@@ -3,128 +3,235 @@
   "width": 400,
   "height": 300,
   "background": "#ffffe7",
+  "title": "Social Support and Freedom to Make Choices",
+  "config": {
+    "title": {
+      "fontSize": 16
+    }
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
   },
   "params": [
     {
-      "name": "country_selection",
+      "name": "region_selection",
       "bind": {
         "input": "select",
         "options": [
           null,
-          "Afghanistan",
-          "Australia",
-          "Finland",
-          "Israel",
-          "Palestine",
-          "Ukraine",
-          "United States of America"
+          "Africa",
+          "Central and Eastern Europe",
+          "Commonwealth of Independent States",
+          "East Asia",
+          "Latin America and Caribbean",
+          "Middle East and North Africa",
+          "North America and ANZ",
+          "South Asia",
+          "Southeast Asia",
+          "Sub-Saharan Africa",
+          "Western Europe"
         ],
         "labels": [
           "Show All",
-          "Afghanistan",
-          "Australia",
-          "Finland",
-          "Israel",
-          "Palestine",
-          "Ukraine",
-          "United States of America"
+          "Africa",
+          "Central and Eastern Europe",
+          "Commonwealth of Independent States",
+          "East Asia",
+          "Latin America and Caribbean",
+          "Middle East and North Africa",
+          "North America and ANZ",
+          "South Asia",
+          "Southeast Asia",
+          "Sub-Saharan Africa",
+          "Western Europe"
         ],
-        "name": "Select Country: "
+        "name": "Select Region: "
       }
     },
     {
-      "name": "Year_above",
-      "value": 2023,
+      "name": "score_above",
+      "value": 1,
       "bind": {
         "input": "range",
-        "min": 2015,
-        "max": 2023,
-        "step": 1,
-        "name": "Year: "
+        "min": 1,
+        "max": 8,
+        "step": 0.5,
+        "name": "Happiness score: "
       }
     }
   ],
   "transform": [
     {
-      "filter": "datum.country == 'Australia' || datum.country == 'Afghanistan' || datum.country == 'Israel' || datum.country == 'Palestine' || datum.country == 'United States of America' || datum.country == 'Finland' || datum.country == 'Ukraine'"
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "social_support",
+          "as": "average social support"
+        },
+        {
+          "op": "mean",
+          "field": "freedom_to_make_life_choices",
+          "as": "average choices"
+        },
+        {
+          "op": "mean",
+          "field": "happiness_score",
+          "as": "average_happiness_score"
+        }
+      ],
+      "groupby": [
+        "country",
+        "region"
+      ]
     },
     {
-      "filter": "country_selection == null || datum.country == country_selection"
+      "filter": "region_selection == null || datum.region == region_selection"
     },
     {
-      "filter": "year(datum.year) <= Year_above"
+      "filter": "datum.average_happiness_score >= score_above"
     }
   ],
   "encoding": {
     "x": {
-      "timeUnit": "year",
-      "field": "year",
-      "title": "Year",
-      "axis": {
-        "tickCount": 9
-      },
-      "scale": {
-        "zero": false,
-        "domain": [
-          2015,
-          2023
-        ]
-      }
-    },
-    "y": {
-      "field": "happiness_score",
+      "field": "average social support",
       "type": "quantitative",
-      "title": "Happiness Score",
+      "title": "Social Support",
       "axis": {
         "tickCount": 9
       },
       "scale": {
         "domain": [
           0,
-          8
+          1.6
+        ]
+      }
+    },
+    "y": {
+      "field": "average choices",
+      "type": "quantitative",
+      "title": "Freedom to Choices",
+      "axis": {
+        "tickCount": 8
+      },
+      "scale": {
+        "domain": [
+          0,
+          0.7
         ]
       }
     }
   },
   "layer": [
     {
-      "mark": {
-        "type": "line",
-        "point": {
-          "size": 50
-        },
-        "strokeWidth": 2
-      },
+      "mark": "circle",
       "encoding": {
-        "color": {
-          "field": "country",
-          "type": "nominal",
-          "title": "Country",
+        "size": {
+          "field": "average_happiness_score",
+          "type": "quantitative",
+          "title": "Happiness Score",
           "scale": {
             "domain": [
-              "Afghanistan",
-              "Australia",
-              "Finland",
-              "Israel",
-              "Palestine",
-              "Ukraine",
-              "United States of America"
+              0,
+              2,
+              4,
+              6,
+              8
             ],
             "range": [
-              "#6dccda",
-              "#729ece",
-              "#a8786e",
-              "#ff9e4a",
-              "#a2a2a2",
-              "#ed665d",
-              "#ad8bc9"
+              0,
+              100,
+              200,
+              400,
+              800
             ]
           }
         },
-        "opacity": {
-          "value": 0.8
+        "color": {
+          "field": "region",
+          "type": "nominal",
+          "title": "Region",
+          "scale": {
+            "domain": [
+              "Africa",
+              "Central and Eastern Europe",
+              "Commonwealth of Independent States",
+              "East Asia",
+              "Latin America and Caribbean",
+              "Middle East and North Africa",
+              "North America and ANZ",
+              "South Asia",
+              "Southeast Asia",
+              "Sub-Saharan Africa",
+              "Western Europe"
+            ],
+            "range": [
+              "#1f77b4",
+              "#2ca02c",
+              "#8c564b",
+              "#d62728",
+              "#bcbd22",
+              "#ff7f0e",
+              "#e377c2",
+              "#9467bd",
+              "#17becf",
+              "#7f7f7f",
+              "#ff9896"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+          },
+          {
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average life expectancy",
+            "type": "quantitative",
+            "title": "Life Expectancy",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == 'Afghanistan'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dy": 10,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "country",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "black"
         },
         "tooltip": [
           {
@@ -150,16 +257,12 @@
     {
       "transform": [
         {
-          "filter": "datum.country == 'Afghanistan' &&  year(datum.year) == 2023"
-        },
-        {
-          "calculate": "'Afghanistan ' + format(datum['happiness_score'], '.2f')",
-          "as": "text_annotation_raw"
+          "filter": "datum.country == 'Central African Republic'"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "center",
+        "align": "left",
         "baseline": "middle",
         "dy": 15,
         "fontSize": 11.5,
@@ -167,7 +270,7 @@
       },
       "encoding": {
         "text": {
-          "field": "text_annotation_raw",
+          "field": "country",
           "type": "nominal"
         },
         "color": {
@@ -197,64 +300,12 @@
     {
       "transform": [
         {
-          "filter": "datum.country == 'Finland' &&  year(datum.year) == 2023"
-        },
-        {
-          "calculate": "'Finland ' + format(datum['happiness_score'], '.2f')",
-          "as": "text_annotation_raw"
+          "filter": "datum.country == 'Iceland'"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "dy": -10,
-        "dx": -15,
-        "fontSize": 11.5,
-        "fontStyle": "italic"
-      },
-      "encoding": {
-        "text": {
-          "field": "text_annotation_raw",
-          "type": "nominal"
-        },
-        "color": {
-          "value": "black"
-        },
-        "tooltip": [
-          {
-            "field": "country",
-            "type": "nominal",
-            "title": "Country"
-          },
-          {
-            "field": "happiness_score",
-            "type": "quantitative",
-            "title": "Happiness Score",
-            "format": ".2f"
-          },
-          {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
-          }
-        ]
-      }
-    },
-    {
-      "transform": [
-        {
-          "filter": "datum.country == 'Israel' &&  year(datum.year) == 2018"
-        },
-        {
-          "calculate": "'Israel ' + format(datum['happiness_score'], '.2f')",
-          "as": "text_annotation_raw"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "center",
+        "align": "left",
         "baseline": "middle",
         "dy": 15,
         "fontSize": 11.5,
@@ -262,7 +313,7 @@
       },
       "encoding": {
         "text": {
-          "field": "text_annotation_raw",
+          "field": "country",
           "type": "nominal"
         },
         "color": {
@@ -292,24 +343,20 @@
     {
       "transform": [
         {
-          "filter": "datum.country == 'Ukraine' &&  year(datum.year) == 2020"
-        },
-        {
-          "calculate": "'Ukraine ' + format(datum['happiness_score'], '.2f')",
-          "as": "text_annotation_raw"
+          "filter": "datum.country == 'Sudan'"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "center",
+        "align": "left",
         "baseline": "middle",
-        "dy": -15,
+        "dx": 10,
         "fontSize": 11.5,
         "fontStyle": "italic"
       },
       "encoding": {
         "text": {
-          "field": "text_annotation_raw",
+          "field": "country",
           "type": "nominal"
         },
         "color": {
@@ -339,24 +386,20 @@
     {
       "transform": [
         {
-          "filter": "datum.country == 'Palestine' &&  year(datum.year) == 2020"
-        },
-        {
-          "calculate": "'Palestine ' + format(datum['happiness_score'], '.2f')",
-          "as": "text_annotation_raw"
+          "filter": "datum.country == 'Cambodia'"
         }
       ],
       "mark": {
         "type": "text",
-        "align": "center",
+        "align": "left",
         "baseline": "middle",
-        "dy": 15,
+        "dx": -60,
         "fontSize": 11.5,
         "fontStyle": "italic"
       },
       "encoding": {
         "text": {
-          "field": "text_annotation_raw",
+          "field": "country",
           "type": "nominal"
         },
         "color": {

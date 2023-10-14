@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
+    },
+    "title": "Daily Max Temperatures (C) in Seattle, WA",
+    "config": {
+        "view": {
+            "strokeWidth": 0,
+            "step": 13
+        },
+        "axis": {
+            "domain": false
+        }
+    },
+    "transform": [
+        {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "happiness_score",
+                    "as": "average happiness score"
+                }
+            ],
+            "groupby": [
+                "country"
+            ]
+        },
+        {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "perceptions_of_corruption",
+                    "as": "average corruption"
+                }
+            ],
+            "groupby": [
+                "country"
+            ]
+        }
+    ],
+    "mark": "rect",
+    "encoding": {
+        "x": {
+            "field": "average happiness score",
+            "type": "quantitative",
+            "title": "Day",
+            "scale": {
+                "domain": [
+                    0,
+                    8
+                ]
+            }
+        },
+        "y": {
+            "field": "country",
+            "type": "nominal",
+            "title": "Month"
+        },
+        "color": {
+            "field": "average corruption",
+            "type": "quantitative",
+            "domain": [
+                0,
+                2
+            ]
+        }
+    }
+}

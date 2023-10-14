@@ -1,0 +1,204 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+    "height": 300,
+    "title": "Healthy Life Expectancy",
+    "config": {
+      "title": {
+        "fontSize": 16
+      }
+    },
+    "background": "#ffffe7",
+    "data": {
+        "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
+    },
+    "params": [
+      {
+      "name": "region_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Africa",
+          "Central and Eastern Europe",
+          "Commonwealth of Independent States",
+          "East Asia",
+          "Latin America and Caribbean",
+          "Middle East and North Africa",
+          "North America and ANZ",
+          "South Asia",
+          "Southeast Asia",
+          "Sub-Saharan Africa",
+          "Western Europe"
+        ],
+        "labels": [
+          "Show All",
+          "Africa",
+          "Central and Eastern Europe",
+          "Commonwealth of Independent States",
+          "East Asia",
+          "Latin America and Caribbean",
+          "Middle East and North Africa",
+          "North America and ANZ",
+          "South Asia",
+          "Southeast Asia",
+          "Sub-Saharan Africa",
+          "Western Europe"
+        ],
+        "name": "Select Region: "
+      }
+    },
+        {
+            "name": "Year_above",
+            "value": 2023,
+            "bind": {
+                "input": "range",
+                "min": 2015,
+                "max": 2023,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "happiness_score",
+                    "as": "average happiness score"
+                },
+                {
+                    "op": "mean",
+                    "field": "healthy_life_expectancy",
+                    "as": "average expectancy"
+                }
+            ],
+            "groupby": [
+                "region",
+                "year"
+            ]
+        },
+         {
+      "filter": "region_selection == null || datum.region == region_selection"
+    },
+        {
+            "filter": "year(datum.year) <= Year_above"
+        }
+    ],
+    "mark": "circle",    
+    "encoding": {
+        "x": {
+            "timeUnit": "year",
+            "field": "year",
+            "title": "Year",
+            "axis": {
+                "tickCount": 9
+            },
+            "scale": {
+                "zero": false,
+                "domain": [
+                    2015,
+                    2023
+                ]
+            }
+        },
+        "y": {
+            "field": "average expectancy",
+            "type": "quantitative",
+            "title": "Healthy Life Expectancy",
+            "axis": {
+              "tickCount": 6
+            },
+            "scale": {
+              "domain": [
+                0,
+                1.2
+              ]
+            }
+      
+        },
+        "color": {
+            "field": "region",
+            "type": "nominal",
+            "title": "Region",
+            "scale": {
+                          "domain": [
+              "Africa",
+              "Central and Eastern Europe",
+              "Commonwealth of Independent States",
+              "East Asia",
+              "Latin America and Caribbean",
+              "Middle East and North Africa",
+              "North America and ANZ",
+              "South Asia",
+              "Southeast Asia",
+              "Sub-Saharan Africa",
+              "Western Europe"
+            ],
+                "range": [
+                    "#1f77b4",
+                    "#2ca02c",
+                    "#8c564b",
+                    "#d62728",
+                    "#bcbd22",
+                    "#ff7f0e",
+                    "#e377c2",
+                    "#9467bd",
+                    "#17becf",
+                    "#7f7f7f",
+                    "#ff9896"
+                ]
+            }
+        },
+        "opacity": {
+          "value": 0.6
+        },
+                "size": {
+          "field": "average happiness score",
+          "type": "quantitative",
+          "title": "Happiness Score",
+          "scale": {
+            "domain": [
+              0,
+              2,
+              4,
+              6,
+              8
+            ],
+            "range": [
+              0,
+              100,
+              200,
+              400,
+              800
+            ]
+          }
+        },
+        "tooltip": [
+            {
+                "field": "region",
+                "type": "nominal",
+                "title": "Region"
+            },
+            {
+                "field": "average expectancy",
+                "type": "quantitative",
+                "title": "Live Expectancy",
+                "format": ".2f"
+            },
+            {
+                "field": "average happiness score",
+                "type": "quantitative",
+                "title": "Happiness Score",
+                "format": ".2f"
+            },
+            {
+                "field": "year",
+                "title": "Year",
+                "type": "temporal",
+                "format": "%Y"
+            }
+        ]
+    }
+}

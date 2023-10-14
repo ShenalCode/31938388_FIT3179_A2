@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"},
+  "background": "#ffffe7",
+  "title": "Generosity",
+  "transform": [
+    {
+            "aggregate": [
+                {
+                    "op": "mean",
+                    "field": "happiness_score",
+                    "as": "average happiness score"
+                },
+                {
+                    "op": "mean",
+                    "field": "generosity",
+                    "as": "average generosity"
+                }
+            ],
+            "groupby": [
+                "region"
+            ]
+        }
+  ],
+  "mark": "rect",
+  "width": 300,
+  "height": 300,
+  "encoding": {
+    "x": {
+      "bin": {"maxbins":15},
+      "field": "average happiness score",
+      "type": "quantitative",
+      "axis":{
+        "format": ".1f"
+      },
+      "title": "Average Happiness Score"
+    },
+    "y": {
+      "field": "region",
+      "type": "nominal",
+      "title": "Region"
+    },
+    "color": {
+      "field": "average generosity",
+      "type": "quantitative",
+      "title": "Average Generosity",
+      "scale": {
+        "range": ["#fee6ce","#7f2704"]
+      }
+    },
+    "tooltip": [
+            {
+                "field": "region",
+                "type": "nominal",
+                "title": "Region"
+            },
+            {
+                "field": "average generosity",
+                "type": "quantitative",
+                "title": "Average Generosity",
+                "format": ".2f"
+            },
+            {
+                "field": "average happiness score",
+                "type": "quantitative",
+                "title": "Happiness Score",
+                "format": ".1f"
+            }
+        ]
+  },
+  "config": {
+"axis": {"grid": true, "tickBand": "extent", "gridColor": "#b3b3b3"},
+"title": {
+  "fontSize": 16
+}
+}
+}
