@@ -119,7 +119,7 @@
                           {
                               "field": "name",
                               "type": "quantitative",
-                              "title": "Score",
+                              "title": "Happiness Score",
                               "format": ".2f"
                           }
                       ]
