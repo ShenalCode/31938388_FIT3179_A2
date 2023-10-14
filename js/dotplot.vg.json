@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": "container",
+    "width": 500,
     "height": 300,  
-    "background": "#f8e9f9",
+    "background": "#ffffe7",
     "data": {
       "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
     },
@@ -25,7 +25,6 @@
       "field": "average happiness score",
       "type": "quantitative",
       "axis": {
-        "grid": false,
         "title": "Average  Happiness Score"
     },
       "scale": {"zero": false}
@@ -34,7 +33,8 @@
         "field": "region", 
         "type": "nominal", 
         "axis": {
-          "title": null
+          "title": null,
+          "grid": true
         }
     },
     "color": {

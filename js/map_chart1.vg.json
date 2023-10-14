@@ -1,0 +1,365 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#f8e9f9",
+  "vconcat": [
+      {
+          "width": 800,
+          "height": 400,
+          "title": "Average Happiness Score of Countries in the World (2015-2023)",
+          "projection": {
+              "type": "equalEarth"
+          },
+          "layer": [
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "mark": {
+                      "type": "geoshape",
+                      "fill": "#bec4c7",
+                      "stroke": "white"
+                  },
+                  "transform": [
+                      {
+                          "calculate": "'Data is not available in ' + datum.properties.NAME",
+                          "as": "note"
+                      }
+                  ],
+                  "encoding": {
+                      "tooltip": {
+                          "field": "note"
+                      }
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/oceans.topojson",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "oceans"
+                      }
+                  },
+                  "mark": {
+                      "type": "geoshape",
+                      "fill": "#a8d5e5"
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/WorldMapWithGraticules.topojson",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_graticules_30"
+                      }
+                  },
+                  "mark": {
+                      "type": "geoshape",
+                      "fill": null,
+                      "stroke": "#bec4c7"
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "transform": [
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
+                              },
+                              "key": "country",
+                              "fields": [
+                                  "name"
+                              ]
+                          }
+                      }
+                  ],
+                  "mark": {
+                      "type": "geoshape",
+                      "stroke": "white"
+                  },
+                  "encoding": {
+                      "color": {
+                          "field": "name",
+                          "title": "Average Happiness Score",
+                          "type": "quantitative",
+                          "scale": {
+                              "type": "linear",
+                              "range": [
+                                  "#fee5d9",
+                                  "#fcae91",
+                                  "#fb6a4a",
+                                  "#de2d26",
+                                  "#a50f15"
+                              ]
+                          }
+                      },
+                      "tooltip": [
+                          {
+                              "field": "properties.NAME",
+                              "type": "nominal",
+                              "title": "Country"
+                          },
+                          {
+                              "field": "name",
+                              "type": "quantitative",
+                              "title": "Score",
+                              "format": ".2f"
+                          }
+                      ]
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "transform": [
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
+                              },
+                              "key": "country",
+                              "fields": [
+                                  "name"
+                              ]
+                          }
+                      },
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/countryInfo.csv"
+                              },
+                              "key": "name",
+                              "fields": [
+                                  "latitude",
+                                  "longitude"
+                              ]
+                          }
+                      },
+                      {
+                          "window": [
+                              {
+                                  "op": "rank",
+                                  "as": "ranking"
+                              }
+                          ],
+                          "sort": [
+                              {
+                                  "field": "name",
+                                  "order": "descending"
+                              }
+                          ]
+                      },
+                      {"filter": "datum.ranking == 1"},
+                      {
+                          "calculate": "'Finland ' + format(datum['name'], '.2f')", "as": "text_annotation_raw"
+                      },
+                      {
+                          "calculate": "split(datum.text_annotation_raw,';')",
+                          "as": "text_annotation"
+                      }
+                  ],
+                  "mark": {
+                      "type": "text",
+                      "align": "left",
+                      "fontStyle": "bold",
+                      "color": "black"
+                    },
+                    "encoding": {
+                      "longitude": {"field": "longitude", "type": "quantitative"},
+                      "latitude": {"field": "latitude", "type": "quantitative"},
+                      "text": {"field": "text_annotation"}
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "transform": [
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
+                              },
+                              "key": "country",
+                              "fields": [
+                                  "name"
+                              ]
+                          }
+                      },
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/countryInfo.csv"
+                              },
+                              "key": "name",
+                              "fields": [
+                                  "latitude",
+                                  "longitude"
+                              ]
+                          }
+                      },
+                      {"filter": "datum.properties.NAME == 'Australia'"},
+                      {
+                          "calculate": "'Australia ' + format(datum['name'], '.2f')", "as": "text_annotation_raw"
+                      },
+                      {
+                          "calculate": "split(datum.text_annotation_raw,';')",
+                          "as": "text_annotation"
+                      }
+                  ],
+                  "mark": {
+                      "type": "text",
+                      "align": "center",
+                      "fontStyle": "bold",
+                      "color": "black"
+                    },
+                    "encoding": {
+                      "longitude": {"field": "longitude", "type": "quantitative"},
+                      "latitude": {"field": "latitude", "type": "quantitative"},
+                      "text": {"field": "text_annotation"}
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "transform": [
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
+                              },
+                              "key": "country",
+                              "fields": [
+                                  "name"
+                              ]
+                          }
+                      },
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/countryInfo.csv"
+                              },
+                              "key": "name",
+                              "fields": [
+                                  "latitude",
+                                  "longitude"
+                              ]
+                          }
+                      },
+                      {"filter": "datum.properties.NAME == 'United States of America'"},
+                      {
+                          "calculate": "'United States ' + format(datum['name'], '.2f')", "as": "text_annotation_raw"
+                      },
+                      {
+                          "calculate": "split(datum.text_annotation_raw,';')",
+                          "as": "text_annotation"
+                      }
+                  ],
+                  "mark": {
+                      "type": "text",
+                      "align": "center",
+                      "fontStyle": "bold",
+                      "color": "black"
+                    },
+                    "encoding": {
+                      "longitude": {"field": "longitude", "type": "quantitative"},
+                      "latitude": {"field": "latitude", "type": "quantitative"},
+                      "text": {"field": "text_annotation"}
+                  }
+              },
+              {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/js/ne_110m.json",
+                      "format": {
+                          "type": "topojson",
+                          "feature": "ne_110m_admin_0_countries"
+                      }
+                  },
+                  "transform": [
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_AVG.csv"
+                              },
+                              "key": "country",
+                              "fields": [
+                                  "name"
+                              ]
+                          }
+                      },
+                      {
+                          "lookup": "properties.NAME",
+                          "from": {
+                              "data": {
+                                  "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/countryInfo.csv"
+                              },
+                              "key": "name",
+                              "fields": [
+                                  "latitude",
+                                  "longitude"
+                              ]
+                          }
+                      },
+                      {"filter": "datum.properties.NAME == 'Afghanistan'"},
+                      {
+                          "calculate": "'Afghanistan ' + format(datum['name'], '.2f')", "as": "text_annotation_raw"
+                      },
+                      {
+                          "calculate": "split(datum.text_annotation_raw,';')",
+                          "as": "text_annotation"
+                      }
+                  ],
+                  "mark": {
+                      "type": "text",
+                      "align": "center",
+                      "fontStyle": "bold",
+                      "color": "black"
+                    },
+                    "encoding": {
+                      "longitude": {"field": "longitude", "type": "quantitative"},
+                      "latitude": {"field": "latitude", "type": "quantitative"},
+                      "text": {"field": "text_annotation"}
+                  }
+              }
+          ]
+      }
+  ],
+  "config": {
+      "title": {
+          "font": "sans-serif",
+          "fontSize": 14
+      }
+  }
+}

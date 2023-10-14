@@ -1,167 +1,159 @@
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>31938388 - FIT3179 Week 9 Homework</title>
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+        <style>
+            html,
+            body {
+                background-color: #ffffe7;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>31938388 - FIT3179 Week 9 Homework</title>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;300;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+            #text_div1 {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
+            #text_div2 {
+                margin-left: 50px;
+                margin-right: 50px;
+            }
 
-    <style>
-        html,
-body {
-    background-color: #f8e9f9;
-}
+            #text_div3 {
+                margin-left: 50px;
+                margin-right: 50px;
+            }
 
-#text_div1 {
-    padding-left: 20px;
-    padding-right: 20px;
-}
+            h1 {
+                text-align: center;
+                color: #165a72;
+                font-family: 'Oswald', sans-serif; 
+                font-size: 84;
+            }
 
-#text_div2 {
-    margin-left: 50px;
-    margin-right: 50px;
-}
+            h3 {
+                text-align: center;
+                color: #165a72;
+                font-size: 24;
+                font-family: 'Oswald', sans-serif; 
+            }
 
-#text_div3 {
-    margin-left: 50px;
-    margin-right: 50px;
-}
+            p {
+                color: black;
+                font-size: 20;
+                font-family: 'Roboto', sans-serif;
+            }
 
-h1 {
-    text-align: center;
-    color: #165a72;
-    font-family: 'Oswald', sans-serif; 
-    font-size: 84;
-}
+            pure-u-1-2  {
+                background-color: #f8e9f9;
+                margin-left: 20px;
+                margin-right: 20px;
+                padding-right: 20px;
+                padding-left: 20px;
+            }
 
-h3 {
-    text-align: center;
-    color: #165a72;
-    font-size: 24;
-    font-family: 'Oswald', sans-serif; 
-}
+            #map {
+                align-content: center;
+                display: block;
+            }
 
-p {
-    color: black;
-    font-size: 20;
-    font-family: 'Roboto', sans-serif;
-}
+            #scatterplot1 {
+                align-content: right;
+                display: block;
+            }
 
-pure-u-1-2  {
-    background-color: #f8e9f9;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-}
+            #dotplot1 {
+                align-content: left;
+                display: block;
+            }
 
-#map {
-    align-content: center;
-    display: block;
-}
-
-#scatterplot1 {
-    align-content: right;
-    display: block;
-}
-
-#dotplot1 {
-    align-content: left;
-    display: block;
-}
-
-#top-text1{
-        margin-right: 50px;
-        margin-left: 50px;
-        margin-top: 20px;
-        margin-bottom: 50px;
-}
-    </style>
-
-
-</head>
-
-<body>
-    <div class="pure-g" style="width: 100%;"> 
-        <div class="pure-u-1-1"> 
-            <h1>Happiness Scores of Countries</h1>
-        </div>
-        <div class="pure-u-1-1" id="top-text1"> 
-            <div id="text_div1">
-                <p>The World Happiness Report is an annually released report ranking the happiness of countries based on several quality-of-life
-                     indicators of the people of each nation. It was first introduced in 2012 and has been released annually since 2013.  
-                     The report outlines happiness of each country and the causes of happiness and misery. This helps the policy making bodies 
-                     in countries to create their policies to address their citizens needs and improve their happiness.
-                </p>
+            #top-text1{
+                    margin-right: 50px;
+                    margin-left: 50px;
+                    margin-top: 20px;
+                    margin-bottom: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="pure-g" style="width: 100%;"> 
+            <div class="pure-u-1-1"> 
+                <h1>Happiness Scores of Countries</h1>
             </div>
-        </div>
-        <div class="pure-u-1-5"> 
-        </div>
-        <div class="pure-u-3-5"> 
-            <div id="map"></div>
-        </div>
-        <div class="pure-u-1-5"> 
-        </div>
-        <div class="pure-u-1-2" style="margin-top: 20px;"> 
-            <h3>Happiness Score Range of Each Region</h3>
-        </div>  
-        <div class="pure-u-1-2" style="margin-top: 20px;"> 
-            <h3>Correlation between Happiness score and GDP per Capita</h3>
-        </div>  
-        <div class="pure-u-1-2"> 
-            <div id="dotplot1" style="margin-left: 20px;"></div>
-        </div>  
-        <div class="pure-u-1-2"> 
-            <div id="scatterplot1"></div>
-        </div>  
-        <div class="pure-u-1-2"> 
-            <div id="text_div2">
-                <p>
-                    This chart shows the distribution of happiness scores in each region. 
-                    As you can see in the chart Western Europe is mostly distributed in the 7 to 7.5 range. 
-                    In fact, in the 2023 rankings Finland was named as the happiest country in the world. Meanwhile, 
-                    Sub-Saharan Africa countries are distributed in the 3.5 to 5 in the happiness score range.                     
-                </p>
+            <div class="pure-u-1-1" id="top-text1"> 
+                <div id="text_div1">
+                    <p>The World Happiness Report is an annually released report ranking the happiness of countries based on several quality-of-life
+                        indicators of the people of each nation. It was first introduced in 2012 and has been released annually since 2013.  
+                        The report outlines happiness of each country and the causes of happiness and misery. This helps the policy making bodies 
+                        in countries to create their policies to address their citizens needs and improve their happiness.
+                    </p>
+                </div>
             </div>
-        </div>  
-        <div class="pure-u-1-2"> 
-            <div id="text_div3">
-                <p>
-                    Gross Domestic Product per Capita is the Gross Domestic Product, which is the total value of all goods and services produced
-                    within a country's borders in a specific period, usually a year or a quarter divided by the population. High GDP per capita
-                    generally indicates a higher standard of living and more economic opportunities for the residents of a country, while low
-                    GDP per capita can suggest lower living standards and potentially higher poverty levels. As you can see in the chart 
-                    countries with higher happiness seemingly has higher GDP per capita. 
-                </p>
+            <div class="pure-u-1-5"> 
             </div>
-        </div>  
-    </div>     
-    <script type="text/javascript">
-        var spec1 = "js/map2.vg.json";
-        vegaEmbed('#map', spec1).then(function (result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
+            <div class="pure-u-3-5"> 
+                <div id="map"></div>
+            </div>
+            <div class="pure-u-1-5"> 
+            </div>
+            <div class="pure-u-1-2" style="margin-top: 20px;"> 
+                <h3>Happiness Score Range of Each Region</h3>
+            </div>  
+            <div class="pure-u-1-2" style="margin-top: 20px;"> 
+                <h3>Correlation between Happiness score and GDP per Capita</h3>
+            </div>  
+            <div class="pure-u-1-2"> 
+                <div id="dotplot1" style="margin-left: 20px;"></div>
+            </div>  
+            <div class="pure-u-1-2"> 
+                <div id="scatterplot1"></div>
+            </div>  
+            <div class="pure-u-1-2"> 
+                <div id="text_div2">
+                    <p>
+                        This chart shows the distribution of happiness scores in each region. 
+                        As you can see in the chart Western Europe is mostly distributed in the 7 to 7.5 range. 
+                        In fact, in the 2023 rankings Finland was named as the happiest country in the world. Meanwhile, 
+                        Sub-Saharan Africa countries are distributed in the 3.5 to 5 in the happiness score range.                     
+                    </p>
+                </div>
+            </div>  
+            <div class="pure-u-1-2"> 
+                <div id="text_div3">
+                    <p>
+                        Gross Domestic Product per Capita is the Gross Domestic Product, which is the total value of all goods and services produced
+                        within a country's borders in a specific period, usually a year or a quarter divided by the population. High GDP per capita
+                        generally indicates a higher standard of living and more economic opportunities for the residents of a country, while low
+                        GDP per capita can suggest lower living standards and potentially higher poverty levels. As you can see in the chart 
+                        countries with higher happiness seemingly has higher GDP per capita. 
+                    </p>
+                </div>
+            </div>  
+        </div>     
+        <script type="text/javascript">
+            var spec1 = "js/map2.vg.json";
+            vegaEmbed('#map', spec1).then(function (result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
 
-        var spec2 = "js/homework10.vg.json";
-        vegaEmbed('#scatterplot1', spec2).then(function (result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-        
-        var spec3 = "js/dotplot.vg.json";
-        vegaEmbed('#dotplot1', spec3).then(function (result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-    </script>
-
-</body>
-
+            var spec2 = "js/homework10.vg.json";
+            vegaEmbed('#scatterplot1', spec2).then(function (result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            
+            var spec3 = "js/dotplot.vg.json";
+            vegaEmbed('#dotplot1', spec3).then(function (result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+        </script>
+    </body>
 </html>

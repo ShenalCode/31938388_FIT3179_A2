@@ -1,0 +1,272 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "background": "#ffffe7",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179_A2/main/data/WHR_all.csv"
+  },
+  "params": [
+    {
+      "name": "country_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Afghanistan",
+          "Australia",
+          "Finland",
+          "Israel",
+          "Palestinian Territories",
+          "Ukraine",
+          "United States of America"
+        ],
+        "labels": [
+          "Show All",
+          "Afghanistan",
+          "Australia",
+          "Finland",
+          "Israel",
+          "Palestinian Territories",
+          "Ukraine",
+          "United States of America"
+        ],
+        "name": "Select Country: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.country == 'Australia' || datum.country == 'Afghanistan' || datum.country == 'Israel' || datum.country == 'Palestinian Territories' || datum.country == 'United States of America' || datum.country == 'Finland' || datum.country == 'Ukraine'"
+    },
+    {"filter": "country_selection == null || datum.country == country_selection"}
+  ],
+  "encoding": {
+    "x": {
+      "timeUnit": "year",
+      "field": "year",
+      "title": "Year",
+      "axis": {
+        "tickCount": 9
+     },
+      "scale": {
+        "zero": false,
+        "domain": [2015, 2023]
+      }
+    },
+    "y": {
+      "field": "happiness_score",
+      "type": "quantitative",
+      "title": "Happiness Score",
+      "axis": {
+        "tickCount": 9
+      },
+      "scale": {
+        "domain": [0, 8]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": {
+          "size": 50
+        },
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "country",
+          "type": "nominal",
+          "title": "Country",
+          "scale": {
+            "domain": [
+              "Afghanistan",
+              "Australia",
+              "Finland",
+              "Israel",
+              "Palestinian Territories",
+              "Ukraine",
+              "United States of America"
+            ],
+            "range": [
+              "#6dccda",
+              "#729ece",
+              "#a8786e",
+              "#ff9e4a",
+              "#a2a2a2",
+              "#ed665d",
+              "#ad8bc9"
+            ]
+          }
+        },
+        "opacity": {
+          "value": 0.8
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+          },
+          {
+            "field": "year",
+            "title": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == 'Afghanistan' &&  year(datum.year) == 2023"
+        },
+        {
+          "calculate": "'Afghanistan ' + format(datum['happiness_score'], '.2f')",
+          "as": "text_annotation_raw"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dy": 10,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "text_annotation_raw",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "black"
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+          },
+          {
+            "field": "year",
+            "title": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == 'Finland' &&  year(datum.year) == 2023"
+        },
+        {
+          "calculate": "'Finland ' + format(datum['happiness_score'], '.2f')",
+          "as": "text_annotation_raw"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dy": -10,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "angle": -40
+      },
+      "encoding": {
+        "text": {
+          "field": "text_annotation_raw",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "black"
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+          },
+          {
+            "field": "year",
+            "title": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.country == 'Ukraine' &&  year(datum.year) == 2020"
+        },
+        {
+          "calculate": "'Ukraine surpassed Palestine'",
+          "as": "text_annotation_raw"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dy": -10,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "angle": -30
+      },
+      "encoding": {
+        "text": {
+          "field": "text_annotation_raw",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "black"
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "happiness_score",
+            "type": "quantitative",
+            "title": "Happiness Score",
+            "format": ".2f"
+          },
+          {
+            "field": "year",
+            "title": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          }
+        ]
+      }
+    }
+  ]
+}
