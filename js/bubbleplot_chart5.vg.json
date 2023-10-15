@@ -203,9 +203,9 @@
             "format": ".2f"
           },
           {
-            "field": "average life expectancy",
+            "field": "average choices",
             "type": "quantitative",
-            "title": "Life Expectancy",
+            "title": "Make choices",
             "format": ".2f"
           }
         ]
@@ -240,16 +240,27 @@
             "title": "Country"
           },
           {
-            "field": "happiness_score",
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
             "type": "quantitative",
             "title": "Happiness Score",
             "format": ".2f"
           },
           {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average choices",
+            "type": "quantitative",
+            "title": "Make choices",
+            "format": ".2f"
           }
         ]
       }
@@ -283,16 +294,27 @@
             "title": "Country"
           },
           {
-            "field": "happiness_score",
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
             "type": "quantitative",
             "title": "Happiness Score",
             "format": ".2f"
           },
           {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average choices",
+            "type": "quantitative",
+            "title": "Make choices",
+            "format": ".2f"
           }
         ]
       }
@@ -326,16 +348,27 @@
             "title": "Country"
           },
           {
-            "field": "happiness_score",
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
             "type": "quantitative",
             "title": "Happiness Score",
             "format": ".2f"
           },
           {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average choices",
+            "type": "quantitative",
+            "title": "Make choices",
+            "format": ".2f"
           }
         ]
       }
@@ -369,16 +402,27 @@
             "title": "Country"
           },
           {
-            "field": "happiness_score",
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
             "type": "quantitative",
             "title": "Happiness Score",
             "format": ".2f"
           },
           {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average choices",
+            "type": "quantitative",
+            "title": "Make choices",
+            "format": ".2f"
           }
         ]
       }
@@ -412,16 +456,27 @@
             "title": "Country"
           },
           {
-            "field": "happiness_score",
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "average_happiness_score",
             "type": "quantitative",
             "title": "Happiness Score",
             "format": ".2f"
           },
           {
-            "field": "year",
-            "title": "Year",
-            "type": "temporal",
-            "format": "%Y"
+            "field": "average social support",
+            "type": "quantitative",
+            "title": "Social Support",
+            "format": ".2f"
+          },
+          {
+            "field": "average choices",
+            "type": "quantitative",
+            "title": "Make choices",
+            "format": ".2f"
           }
         ]
       }

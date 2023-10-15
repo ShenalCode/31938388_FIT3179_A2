@@ -296,7 +296,8 @@
                     "type": "text",
                     "align": "center",
                     "fontStyle": "bold",
-                    "color": "black"
+                    "color": "black",
+                    "dy": -15
                   },
                   "encoding": {
                     "longitude": {"field": "longitude", "type": "quantitative"},

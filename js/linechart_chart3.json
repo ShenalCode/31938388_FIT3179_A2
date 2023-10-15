@@ -123,9 +123,6 @@
             ]
           }
         },
-        "opacity": {
-          "value": 0.8
-        },
         "tooltip": [
           {
             "field": "country",
